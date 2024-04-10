@@ -31,7 +31,7 @@
     </div>
     <div class="navbar">
       <ul class="menu">
-        <li class="logo"><a href="#"><i class='bx bxs-user'> <?= $_SESSION['Data']['Username'] ?></i></a></li>
+        <li class="logo"><a href="#"><i class='bx bxs-user'> <?= $_SESSION['Data']['fullname'] ?></i></a></li>
         <li class="hideOnMobile"><a href="../Home/welcome.php"><i class='bx bx-home-alt-2'></i></a></li>
         <li class="hideOnMobile"><a href="../ListOfAccount/listofAccount.php"><i class='bx bxs-user'></i></i></a></li>
         <li class="hideOnMobile"><a href="../AddAccount/SignUp.php"><i class='bx bxs-user-plus'></i></a></li>
