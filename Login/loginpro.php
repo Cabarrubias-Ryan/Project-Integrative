@@ -26,7 +26,15 @@
 
         // Use password_verify to check if the entered password matches the hashed password
         if (password_verify($password, $userData['password'])) {
-            $_SESSION['Name'] = $userData['firstname'] . ' ' . $userData['lastname'];
+
+            $userInfo = [
+                'fullname' => $userData['firstname'] . " " . $userData['lastname'],
+                'accountrole' => $userData['accountrole'],
+                'password' => $userData['password'],
+                'Username' => $userData['username']
+            ];
+
+            $_SESSION['Data'] = $userInfo;
             $_SESSION['loginChecker'] = true;
             header("Location: ../Home/welcome.php");
         } else {
