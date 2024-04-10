@@ -18,7 +18,7 @@
         <form action="Login/loginpro.php" method="post">
             <h1>Login</h1>
             <div class="input-box">
-                <input type="text" name="username" placeholder = "Username" value = "<?php echo isset($_GET['username']) ? htmlspecialchars(decryptData($_GET['username'])) : '';  ?>" required>
+                <input type="text" name="username" placeholder = "Username" value = "<?php echo isset($_GET['fullname']) ? htmlspecialchars(decryptData($_GET['username'])) : '';  ?>" required>
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
