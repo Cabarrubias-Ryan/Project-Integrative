@@ -40,7 +40,7 @@
             <tbody>
                 <?php
 
-                $sql = "SELECT * FROM student LEFT OUTER JOIN user using(id)";
+                $sql = "SELECT * FROM student LEFT OUTER JOIN user on student.studentID = user.id";
                 $result =  $connection->query($sql);
 
                 if ($result->num_rows > 0) 
