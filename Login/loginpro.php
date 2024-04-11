@@ -8,7 +8,7 @@
 
     // i already have a code to prevent the sqli injection 
     //first is prepare the sql query
-    $queryUser = $connection->prepare("SELECT u.id, u.username, u.password, s.firstname, s.lastname 
+    $queryUser = $connection->prepare("SELECT u.id, u.username, u.password, s.firstname, s.lastname, u.accountrole 
                                        FROM user u 
                                        LEFT OUTER JOIN student s ON u.id = s.studentID 
                                        WHERE u.username = ?");
@@ -29,7 +29,7 @@
 
             $userInfo = [
                 'fullname' => $userData['firstname'] . " " . $userData['lastname'],
-                'accountrole' => $userData['accountrole'],
+                'role' => $userData['accountrole'],
                 'password' => $userData['password'],
                 'Username' => $userData['username']
             ];

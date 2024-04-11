@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include("../database/connection.php");
     include("../Navbar/Menu-NavBar.php");
     include("../Encryption/EncryptionProcess.php");
 
@@ -27,7 +28,7 @@
             <h1>Sign Up</h1>
             <form action="createpro.php" method="post">
                 <div class="textbox">
-                    <input type="text" name="username" placeholder = "Username" value = "<?php echo isset($_GET['user']) ? htmlspecialchars(decryptData($_GET['user'])) : '';  ?>"required>
+                    <input type="text" name="username" placeholder = "Username" required>
                     <?php if(isset($_GET['username'])): ?>
                         <?php if($_GET['username'] == "duplicate") : ?>
                             <strong>Username already been use.</strong>
@@ -62,10 +63,36 @@
                     <?php endif ?>
                 </div>
                 <div class="textbox">
-                    <input type="text" name="firstname" placeholder = "First Name" value = "<?php echo isset($_GET['firstname']) ? htmlspecialchars(decryptData($_GET['firstname'])) : '';  ?>" required>
+                    <select name="accountRole">
+                        <option hidden>Account Role</option>
+                        <option>Administrator</option>
+                        <option>Student</option>
+                    </select>
                 </div>
                 <div class="textbox">
-                    <input type="text" name="lastname" placeholder = "Last Name" value = "<?php echo isset($_GET['lastname']) ? htmlspecialchars(decryptData($_GET['lastname'])) : '';  ?>" required>
+                    <select name="StudentID">
+                        <option hidden>Account Role</option>
+                        <?php
+                            $sql = "SELECT student.studentID, student.firstname, student.lastname from student 
+                            where student.studentID Not in (SELECT user.id FROM user LEFT JOIN student on student.studentID = user.id where student.studentID)";
+
+                            $result =  $connection->query($sql);
+
+                            if ($result->num_rows > 0) 
+                            {
+                                    // output data of each row
+                                    while($row = $result->fetch_assoc()) 
+                                    {
+                                        ?>
+                                            <option value = "<?=$row['studentID']?>" >
+                                                <?= $row['firstname']." ".$row['lastname']?>
+                                            </option>
+                                        <?php
+                                    }
+                            }
+                            $connection->close();
+                        ?>
+                    </select>
                     <?php if(isset($_GET['signup'])): ?>
                         <?php $signupChecker = $_GET['signup'] ?>
                         <?php if($signupChecker == "empty") : ?>

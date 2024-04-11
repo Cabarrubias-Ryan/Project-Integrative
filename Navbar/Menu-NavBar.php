@@ -25,7 +25,14 @@
         <li onclick=hideSidebar()><a href="#"><i class='bx bxs-x-circle' ></i></a></li>
         <li><a href="../Home/welcome.php"><i class='bx bx-home-alt-2'> Home</i></a></li>
         <li><a href="../ListOfAccount/listofAccount.php"><i class='bx bxs-user'> Account List</i></a></li>
-        <li><a href="../AddAcount/SignUp.php"><i class='bx bxs-user-plus'> Add Account</i></a></li>
+        <?php
+          if($_SESSION['Data']['role'] == "Administrator")
+          {
+            ?>
+              <li><a href="../AddAcount/SignUp.php"><i class='bx bxs-user-plus'> Add Account</i></a></li>
+            <?php
+          }
+        ?>
         <li><a href="../Logout/logout.php"><i class='bx bx-log-out'> Logout</i></a></li>
       </ul>
     </div>
@@ -34,7 +41,14 @@
         <li class="logo"><a href="#"><i class='bx bxs-user'> <?= $_SESSION['Data']['fullname'] ?></i></a></li>
         <li class="hideOnMobile"><a href="../Home/welcome.php"><i class='bx bx-home-alt-2'></i></a></li>
         <li class="hideOnMobile"><a href="../ListOfAccount/listofAccount.php"><i class='bx bxs-user'></i></i></a></li>
-        <li class="hideOnMobile"><a href="../AddAccount/SignUp.php"><i class='bx bxs-user-plus'></i></a></li>
+        <?php
+          if($_SESSION['Data']['role'] == "Administrator")
+          {
+            ?>
+              <li class="hideOnMobile"><a href="../AddAccount/SignUp.php"><i class='bx bxs-user-plus'></i></a></li>
+            <?php
+          }
+        ?>
         <li class="hideOnMobile"><a href="../Logout/logout.php"><i class='bx bx-log-out'></i></a></li>
         <li class= "menu-Button" onclick=showSidebar()><a href="#"><i class='bx bx-menu' ></i></a></li>
       </ul>
