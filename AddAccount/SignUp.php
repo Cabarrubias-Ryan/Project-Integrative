@@ -71,7 +71,7 @@
                 </div>
                 <div class="textbox">
                     <select name="StudentID">
-                        <option hidden>Account Role</option>
+                        <option hidden>Account Holder</option>
                         <?php
                             $sql = "SELECT student.studentID, student.firstname, student.lastname from student 
                             where student.studentID Not in (SELECT user.id FROM user LEFT JOIN student on student.studentID = user.id where student.studentID)";
