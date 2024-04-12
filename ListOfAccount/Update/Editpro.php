@@ -18,9 +18,9 @@
     }
     $id = decryptData($_GET['id']);
     
-    $sql =  $connection->prepare("Select u.*, s.firstname, s.lastname, s.birthday, s.course, s.major from user u 
+    $sql =  $connection->prepare("Select u.username, u.password, u.accountrole, u.update_at , u.id, u.student_id, s.firstname, s.lastname, s.birthday, s.course, s.major, s.id from user u 
                                 left outer join student s on u.id = s.studentID 
-                                 where u.id =?");
+                                 where s.id =?");
     $sql->bind_param("i",$id);
     $sql->execute();
     $result = $sql->get_result();
@@ -50,12 +50,13 @@
                 <div class="textbox">
                     <h1>UPDATE</h1>
                     <input type="hidden" name="hiddenId" value ="<?= $Data['id']?>" require>
+                    <input type="hidden" name="hiddenStudentId" value ="<?= $Data['student_id']?>" require>
                 </div>
                 <div class="textbox">
                     <input type="text" name="username" value ="<?= $Data['username'] ?>"  placeholder ="Username" require>
                 </div>
                 <div class="textbox">
-                    <input type="text" name="password"   placeholder ="Password" require>
+                    <input type="password" name="password" value ="<?= $Data['password']?>"  placeholder ="Password" require>
                 </div>
                 <div class="textbox">
                     <input type="text" name="firstname" value ="<?= $Data['firstname'] ?>"  placeholder ="First Name" require>
@@ -71,6 +72,13 @@
                 </div>
                 <div class="textbox">
                     <input type="date" name="birthday" value="<?= $Data['birthday'] ?>"  placeholder ="BirthDate" require>
+                </div>
+                <div class="textbox">
+                    <select name="accountRole" require>
+                        <option hidden>Account Role</option>
+                        <option>Administrator</option>
+                        <option>Student</option>
+                    </select>
                 </div>
                 <div class="button">
                     <input type="submit" value="Save changes">

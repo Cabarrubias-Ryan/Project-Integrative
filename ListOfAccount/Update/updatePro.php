@@ -20,6 +20,7 @@
     }
 
     $id         = $_POST['hiddenId'];
+    $StudentID  = $_POST['hiddenStudentId'];
     $username   = $_POST['username'];
     $password   = $_POST['password'];
     $firstname  = $_POST['firstname'];
@@ -27,7 +28,7 @@
     $course     = $_POST['course'];
     $major      = $_POST['major'];
     $birthday   = $_POST['birthday'];
-    
+    $role       = $_POST['accountRole'];
     
 
     $sqlStudent = "UPDATE student
@@ -44,8 +45,9 @@
                 SET
                 username = '".$username."',
                 password = '".password_hash($password,PASSWORD_BCRYPT)."',
+                accountrole = '".$role."',
                 update_at = CURRENT_TIMESTAMP()
-                WHERE id = $id";
+                WHERE id = $StudentID";
                 
     if($connection->query($sqlStudent) === true && $connection->query($sqlUser) === true)
     {
