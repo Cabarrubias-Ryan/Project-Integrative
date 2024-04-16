@@ -67,7 +67,7 @@
                                         if($_SESSION['Data']['role'] == "Administrator")
                                         {
                                             ?>
-                                                <td><a href="Update/Editpro.php?id=<?= encryptData($row['id'])?>" class="icon"><i class='bx bxs-edit'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="Delete/Deletepro.php?id='<?=encryptData($row['student_id'])?>"  class="icon"><i class='bx bx-trash'></i></a></td>
+                                                <td><a href="Update/Editpro.php?id=<?= encryptData($row['id'])?>" class="icon"><i class='bx bxs-edit'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="Delete/Checking.php?id='<?=encryptData($row['student_id'])?>"  class="icon"><i class='bx bx-trash'></i></a></td>
                                             <?php
                                         }
                                         ?>

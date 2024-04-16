@@ -12,12 +12,12 @@
     include("../../database/connection.php");
     include("../../Encryption/EncryptionProcess.php");
 
-    if(decryptData($_GET['id']) == null && decryptData($_GET['StudentId']))
+    if(decryptData($_SESSION['id']) == null)
     {
         header("Location: ../listofAccount.php");
     }
 
-    $id = decryptData($_GET['id']);
+    $id = decryptData($_SESSION['id']);
 
     $sql = $connection->prepare("Select s.* from student s left join user u on s.StudentID = u.student_id where s.StudentID = ?");
     $sql->bind_param("i",$id);

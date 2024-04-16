@@ -39,6 +39,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../css/EditStyle.css">
+    <style>
+        .SignUp .textbox strong{
+            font-size: 12.5px;
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div class="return-button">
@@ -54,9 +60,14 @@
                 </div>
                 <div class="textbox">
                     <input type="text" name="username" value ="<?= $Data['username'] ?>"  placeholder ="Username" require>
+                    <?php if(isset($_GET['username'])): ?>
+                        <?php if($_GET['username'] == "duplicate") : ?>
+                            <strong>Username already been use.</strong>
+                        <?php endif ?>
+                    <?php endif ?>
                 </div>
                 <div class="textbox">
-                    <input type="password" name="password" value ="<?= $Data['password']?>"  placeholder ="Password" require>
+                    <input type="password" name="password" placeholder ="Password" require>
                 </div>
                 <div class="textbox">
                     <input type="text" name="firstname" value ="<?= $Data['firstname'] ?>"  placeholder ="First Name" require>
