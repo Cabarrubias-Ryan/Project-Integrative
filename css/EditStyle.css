@@ -76,6 +76,10 @@ section{
 select:focus{
     outline:none;
 }
+.SignUp-form strong{
+    font-size: 12.5px;
+    color: red;
+}
 
 .SignUp-form .button input[type="submit"] {
     width: 100%;

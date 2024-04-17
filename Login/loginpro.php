@@ -31,7 +31,8 @@
                 'fullname' => $userData['firstname'] . " " . $userData['lastname'],
                 'role' => $userData['accountrole'],
                 'password' => $userData['password'],
-                'Username' => $userData['username']
+                'Username' => $userData['username'],
+                'id' => $userData['id']
             ];
 
             $_SESSION['Data'] = $userInfo;

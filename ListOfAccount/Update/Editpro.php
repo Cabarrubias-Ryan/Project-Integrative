@@ -54,9 +54,28 @@
                 </div>
                 <div class="textbox">
                     <input type="text" name="username" value ="<?= $Data['username'] ?>"  placeholder ="Username" require>
+                    <?php if(isset($_GET['username'])): ?>
+                        <?php if($_GET['username'] == "duplicate") : ?>
+                            <strong>Username already been use.</strong>
+                        <?php endif ?>
+                    <?php endif ?>
                 </div>
                 <div class="textbox">
                     <input type="password" name="password" placeholder ="Password" require>
+                    <?php if(isset($_GET['passwordcondition'])): ?>
+                        <?php $invalidpasswordChecker = $_GET['passwordcondition'] ?>
+                        <?php if($invalidpasswordChecker == "invalid") : ?>
+                            <strong>Password must have at least 8 characters.</strong>
+                        <?php elseif($invalidpasswordChecker == "UpperCase") : ?>
+                            <strong>Password must have at least one Upper Case.</strong>
+                        <?php elseif($invalidpasswordChecker == "LowerCase") : ?>
+                            <strong>Password must have at least one Lower Case.</strong>
+                        <?php elseif($invalidpasswordChecker == "Number") : ?>
+                            <strong>Password must have at least one number.</strong>
+                        <?php elseif($invalidpasswordChecker == "SpecialCharacter") : ?>
+                            <strong>Password must have at least one special Character.</strong>
+                        <?php endif ?>
+                    <?php endif ?>  
                 </div>
                 <div class="textbox">
                     <input type="text" name="firstname" value ="<?= $Data['firstname'] ?>"  placeholder ="First Name" require>
