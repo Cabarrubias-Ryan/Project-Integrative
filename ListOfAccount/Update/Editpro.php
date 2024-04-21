@@ -78,26 +78,51 @@
                     <?php endif ?>  
                 </div>
                 <div class="textbox">
-                    <input type="text" name="firstname" value ="<?= $Data['firstname'] ?>"  placeholder ="First Name" require>
-                </div>
-                <div class="textbox">
-                    <input type="text" name="lastname" value ="<?= $Data['lastname'] ?>"  placeholder ="Last Name" require>
-                </div>
-                <div class="textbox">
-                    <input type="text" name="course" value ="<?= $Data['course'] ?>"  placeholder ="Course"  require>
-                </div>
-                <div class="textbox">
-                    <input type="text" name="major" value ="<?= $Data['major'] ?>" placeholder ="Major" require>
-                </div>
-                <div class="textbox">
-                    <input type="date" name="birthday" value="<?= $Data['birthday'] ?>"  placeholder ="BirthDate" require>
+                    <input type="password" name="RetypePassword"  placeholder ="Retype Password" require>
+                    <?php if(isset($_GET['password'])): ?>
+                        <?php $signupChecker = $_GET['password'] ?>
+                        <?php if($signupChecker == "notmatch") : ?>
+                            <strong>Your Password didn't match</strong>
+                        <?php endif ?>
+                    <?php endif ?>
                 </div>
                 <div class="textbox">
                     <select name="accountRole" require>
-                        <option hidden>Account Role</option>
+                        <option hidden><?= $Data['accountrole'] ?></option>
                         <option>Administrator</option>
                         <option>Student</option>
                     </select>
+                </div>
+                <div class="textbox">
+                    <select name="StudentID">
+                        <option value = "<?=$Data['student_id']?>"  hidden><?= $Data['firstname'] ?> <?= $Data['lastname'] ?></option>
+                        <?php
+                            $sql = "SELECT student.studentID, student.firstname, student.lastname from student 
+                            where student.studentID Not in (SELECT user.id FROM user LEFT JOIN student on student.studentID = user.id where student.studentID)";
+
+                            $result =  $connection->query($sql);
+
+                            if ($result->num_rows > 0) 
+                            {
+                                    // output data of each row
+                                    while($row = $result->fetch_assoc()) 
+                                    {
+                                        ?>
+                                            <option value = "<?=$row['studentID']?>" >
+                                                <?= $row['firstname']." ".$row['lastname']?>
+                                            </option>
+                                        <?php
+                                    }
+                            }
+                            $connection->close();
+                        ?>
+                    </select>
+                    <?php if(isset($_GET['signup'])): ?>
+                        <?php $signupChecker = $_GET['signup'] ?>
+                        <?php if($signupChecker == "empty") : ?>
+                            <strong>You should not enter a empty data</strong>
+                        <?php endif ?>
+                    <?php endif ?>
                 </div>
                 <div class="button">
                     <input type="submit" value="Save changes">

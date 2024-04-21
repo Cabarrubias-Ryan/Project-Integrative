@@ -28,7 +28,7 @@
             <h1>Sign Up</h1>
             <form action="createpro.php" method="post">
                 <div class="textbox">
-                    <input type="text" name="username" placeholder = "Username" required>
+                    <input type="text" name="username" placeholder = "Username" value = "<?php echo isset($_GET['user']) ? htmlspecialchars(decryptData($_GET['user'])) : '';  ?>" required>
                     <?php if(isset($_GET['username'])): ?>
                         <?php if($_GET['username'] == "duplicate") : ?>
                             <strong>Username already been use.</strong>

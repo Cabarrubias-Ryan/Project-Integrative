@@ -29,10 +29,10 @@
         <tr>
             <thead>
                 <th>Username</th>
-                <th>Password</th>
                 <th>First Name</th>
                 <th>Middle Name</th>
                 <th>Last Name</th>  
+                <th>Account Role</th>
                 <th>Created at</th>
                 <?php
                 if($_SESSION['Data']['role'] == "Administrator")
@@ -58,10 +58,10 @@
                             ?>
                                     <tr>
                                         <td><?=$row['username']?></td>
-                                        <td><?=$row['password']?></td>
                                         <td><?=$row['firstname']?></td>
                                         <td><?=$row['middlename']?></td>
                                         <td><?=$row['lastname']?></td>
+                                        <td><?=$row['accountrole'] ?></td>
                                         <td><?=date('F j, Y', strtotime($row['created_at']))?></td>
                                         <?php
                                         if($_SESSION['Data']['role'] == "Administrator")

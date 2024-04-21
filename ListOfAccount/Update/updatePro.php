@@ -13,11 +13,8 @@
         $StudentID = $_POST['hiddenStudentId'];
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $course = $_POST['course'];
-        $major = $_POST['major'];
-        $birthday = $_POST['birthday'];
+        $retypePassword = $_POST['RetypePassword'];
+        $accountHolder = $_POST['StudentID'];
         $role = $_POST['accountRole'];
 
         $sqlcheck = "SELECT * FROM user WHERE username = ?";
@@ -60,31 +57,22 @@
                 exit();
             }
         }
+        else if($password !== $reTrypassword)
+        {
+            header("Location: Editpro.php?password=notmatch&user=". urlencode(encryptData($id)));
+        }
         
-        $sqlStudent = "UPDATE student
-                SET
-                firstname = ?,
-                lastname = ?,
-                birthday = ?,
-                course = ?,
-                major = ?,
-                updated_at = CURRENT_TIMESTAMP()
-                WHERE id = ?";
-                
-        $stmt = $connection->prepare($sqlStudent);
-        $stmt->bind_param("sssssi", $firstname, $lastname, $birthday, $course, $major, $id);
-        $stmt->execute();
-
         $sqlUser = "UPDATE user
                     SET
                     username = ?,
                     password = ?,
                     accountrole = ?,
+                    student_id = ?,
                     update_at = CURRENT_TIMESTAMP()
                     WHERE id = ?";
                     
         $stmt = $connection->prepare($sqlUser);
-        $stmt->bind_param("sssi", $username, password_hash($password, PASSWORD_BCRYPT), $role, $StudentID);
+        $stmt->bind_param("sssii", $username, password_hash($password, PASSWORD_BCRYPT), $role, $accountHolder, $StudentID);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
